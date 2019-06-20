@@ -1,0 +1,5 @@
+* References
+** [[https://towardsdatascience.com/a-quick-introduction-to-text-summarization-in-machine-learning-3d27ccf18a9f][Brief Introduction to NLP]]
+** [[https://arxiv.org/pdf/1707.02268.pdf][Overview of Text Summarization Techniques]]
+*** See Section 5 for further references to review for conversation summaries
+*** Nathan: See section 7
