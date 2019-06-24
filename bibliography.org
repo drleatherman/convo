@@ -1,5 +1,83 @@
+* Summarization
+** Extraction
+Identifies important pieces of text within a corpus (body of text) and builds a
+summary which contains only those words.
+*** Building an Extraction
+*Steps*
+1. Construct an IR (Intermediate Representation)
+2. Score Sentences based on a scoring algorithm
+3. Select a summary based on the scored sentences
+**** IR
+***** Topic Representation
+Interprets the topics discussed in the corpus. May use a Frequency approach, sentiment analysis, topic word (dictionary), or Bayesian
+Topic Model approach.
+****** Frequency
+Frequency of words used to determine a /topic/. This can be taken a step
+further by using the Log-Likelihood Ratio Test.
+***** Indicator Representation
+Describes every sentence as a list with important covariates such as word count, length, position in the document, and presence
+  of keywords.
+**** Sentence Score
+In a topic IR, this score is an indicator of importance of the sentence. In an
+Indicator IR, this score is some model based off the covariates. Importance of a sentence can be determined
+either by *count* or *proportion* of topic words.
+**** Summary Selection
+Selects the /k/ most important sentences for the summary. Additional criteria
+beyond the score may be assessed to determine the sentences chosen for the
+summary. i.e. Type of document (Newspaper, Blog, Magazine, etc.)
+***** Frequency Approach
+****** Word Probability
+Probability of a word occuring in a document.
+\begin{eq1}
+    P(w) = \frac{f(w)}{N}
+\end{eq1}
+For each sentence, the average probability of a word is assigned as a /weight/.
+Then, the best scoring sentence with the highest probability word is chosen to
+ensure that the sentence is present in the summary. The weight of the chosen
+word is then updated to ensure that a word in the summary is not chosen over a
+word that only occurs once[fn:1].
+\begin{eq2}
+    p_{new}(w_i) = p_{old}(w_i) p_{old}(w_i)
+\end{eq2}
+****** Term Frequency Inverse Document Frequency (TFIDF)
+A weighting technique which penalizes words that occur most frequently in a
+document.
+\begin{eq3}
+    q(w) = f_d(w) \log(\frac{|D|}{f_D(w)})
+\end{eq3}
+$f_d(w)$: Term frequency of a word (w) in a document (d)
+$f_D(w)$: Number of documents that contain the word (w)
+$|D|$: Number of documents in a collection (D)
+- easy and fast to compute.
+- Used in many text summarizers
+******* Centroid-based Summarization
+A method of ranking sentences based on TFIDF
+*Steps*
+1. Detect Topics and documents that describe the same topic clustered together
+   - TFIDF vectors are calculated and TFIDF scores below a predefined threshold
+     are removed
+2. Clustering Algorithm is run over TFIDF vectors and centroids (median of a
+   cluster) are recomputed after each document is added.
+   - Centroids may be considered pseudo-documents which contain a higher than
+     the predefined TFIDF threshold.
+3. Use Centroids to find sentences related to the topic central to the cluster
+   - Cluster-based Relative Utility (CBRU) describes how relevant the topic is
+     to the general topic of the cluster.
+   - Cross Sentence Informational Subsumption (CSIS) measures redundancy between
+     sentences
+
+
+
+** Abstraction
+Interprets and analyzes important pieces of text within a corpus and builds a
+human readable summary. This is more advanced and computation-intenseive than
+Extraction.
+
+
+
 * References
 ** [[https://towardsdatascience.com/a-quick-introduction-to-text-summarization-in-machine-learning-3d27ccf18a9f][Brief Introduction to NLP]]
 ** [[https://arxiv.org/pdf/1707.02268.pdf][Overview of Text Summarization Techniques]]
 *** See Section 5 for further references to review for conversation summaries
 *** Nathan: See section 7
+[fn:1] Unsure of this in particular. Need confirmation
