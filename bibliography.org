@@ -123,7 +123,7 @@ Determine the quality of a summary by comparing it to human summaries.
 A series of n-grams is created from the reference summary and the candidate
 summary (usually 2-3 and rarely 4 grams).
 $p$ = number of common n-grams
-$q$ = number of n-grams from reference summary
+\(q\) = number of n-grams from reference summary
 $$
 {ROUGE-n} = \frac{p}{q}
 $$
