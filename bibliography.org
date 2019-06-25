@@ -29,9 +29,9 @@ summary. i.e. Type of document (Newspaper, Blog, Magazine, etc.)
 ****** Frequency Approach
 ******* Word Probability
 Probability of a word occuring in a document.
-\begin{eq1}
+\begin
     P(w) = \frac{f(w)}{N}
-\end{eq1}
+\end
 For each sentence, the average probability of a word is assigned as a /weight/.
 Then, the best scoring sentence with the highest probability word is chosen to
 ensure that the sentence is present in the summary. The weight of the chosen
@@ -123,7 +123,7 @@ Determine the quality of a summary by comparing it to human summaries.
 A series of n-grams is created from the reference summary and the candidate
 summary (usually 2-3 and rarely 4 grams).
 $p$ = number of common n-grams
-\(q\) = number of n-grams from reference summary
+$q$ = number of n-grams from reference summary
 $$
 {ROUGE-n} = \frac{p}{q}
 $$
