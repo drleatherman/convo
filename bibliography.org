@@ -30,9 +30,7 @@ summary. i.e. Type of document (Newspaper, Blog, Magazine, etc.)
 ******* Word Probability
 Probability of a word occuring in a document.
 #+BEGIN_LaTeX latex
-\begin{math}
-    P(w) = \frac{f(w)}{N}
-\end{math}
+P(w) = \frac{f(w)}{N}
 #+END_LaTeX
 
 For each sentence, the average probability of a word is assigned as a /weight/.
