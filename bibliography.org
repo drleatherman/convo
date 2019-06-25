@@ -45,17 +45,23 @@ word that only occurs once [fn:1].
 ******* Term Frequency Inverse Document Frequency (TFIDF)
 A weighting technique which penalizes words that occur most frequently in a
 document.
-\begin{eq3}
+\begin{math}
     q(w) = f_d(w) \log(\frac{|D|}{f_D(w)})
-\end{eq3}
+\end{math}
+
 $f_d(w)$: Term frequency of a word (w) in a document (d)
+
 $f_D(w)$: Number of documents that contain the word (w)
+
 $|D|$: Number of documents in a collection (D)
+
 - easy and fast to compute.
 - Used in many text summarizers
 ******** Centroid-based Summarization
 A method of ranking sentences based on TFIDF
+
 *Steps*
+
 1. Detect Topics and documents that describe the same topic clustered together
    - TFIDF vectors are calculated and TFIDF scores below a predefined threshold
      are removed
