@@ -105,6 +105,7 @@ Approach summarization as a classification problem. Machine Learning techniques 
 - Support Vector Machines
 - Hidden Markov Models*
 - Conditional Random Fields*
+ 
  *Assume Dependence
 
  Models that assume dependence often outperform those who do not.
@@ -128,10 +129,14 @@ Self explanatory.
 Determine the quality of a summary by comparing it to human summaries.
 **** ROUGE-n
 *gram*: a word
+
 A series of n-grams is created from the reference summary and the candidate
 summary (usually 2-3 and rarely 4 grams).
+
 $p$ = number of common n-grams
+
 $q$ = number of n-grams from reference summary
+
 $$
 {ROUGE-n} = \frac{p}{q}
 $$
@@ -140,8 +145,10 @@ Longest Common Subsequence (LCS) betweeen two sequences of text. The longer the
 LCS, the more similar they are. Requires ordering to be the same.
 **** ROUGE-SU
 Also called /skip-bi-gram/ and /uni-gram/.
+
 Allows insertion of words between the first and last words of bi-grams so
 consecutive words are not needed unlike ROUGE-n and ROUGE-l.
+
 * References
 ** [[https://towardsdatascience.com/a-quick-introduction-to-text-summarization-in-machine-learning-3d27ccf18a9f][Brief Introduction to NLP]]
 ** [[https://arxiv.org/pdf/1707.02268.pdf][Overview of Text Summarization Techniques]]
