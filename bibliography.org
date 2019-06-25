@@ -30,11 +30,10 @@ summary. i.e. Type of document (Newspaper, Blog, Magazine, etc.)
 ******* Word Probability
 Probability of a word occuring in a document.
 
-\\\begin
-
+\begin{math}
     P(w) = \frac{f(w)}{N}
+\end{math}
 
-\end
 For each sentence, the average probability of a word is assigned as a /weight/.
 Then, the best scoring sentence with the highest probability word is chosen to
 ensure that the sentence is present in the summary. The weight of the chosen
