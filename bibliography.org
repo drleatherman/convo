@@ -29,7 +29,9 @@ summary. i.e. Type of document (Newspaper, Blog, Magazine, etc.)
 ****** Frequency Approach
 ******* Word Probability
 Probability of a word occuring in a document.
-\begin
+
+\\\begin
+
     P(w) = \frac{f(w)}{N}
 
 \end
