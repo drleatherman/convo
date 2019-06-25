@@ -25,8 +25,9 @@ either by *count* or *proportion* of topic words.
 Selects the /k/ most important sentences for the summary. Additional criteria
 beyond the score may be assessed to determine the sentences chosen for the
 summary. i.e. Type of document (Newspaper, Blog, Magazine, etc.)
-***** Frequency Approach
-****** Word Probability
+***** Topic Representation
+****** Frequency Approach
+******* Word Probability
 Probability of a word occuring in a document.
 \begin{eq1}
     P(w) = \frac{f(w)}{N}
@@ -39,7 +40,7 @@ word that only occurs once[fn:1].
 \begin{eq2}
     p_{new}(w_i) = p_{old}(w_i) p_{old}(w_i)
 \end{eq2}
-****** Term Frequency Inverse Document Frequency (TFIDF)
+******* Term Frequency Inverse Document Frequency (TFIDF)
 A weighting technique which penalizes words that occur most frequently in a
 document.
 \begin{eq3}
@@ -50,7 +51,7 @@ $f_D(w)$: Number of documents that contain the word (w)
 $|D|$: Number of documents in a collection (D)
 - easy and fast to compute.
 - Used in many text summarizers
-******* Centroid-based Summarization
+******** Centroid-based Summarization
 A method of ranking sentences based on TFIDF
 *Steps*
 1. Detect Topics and documents that describe the same topic clustered together
@@ -65,7 +66,40 @@ A method of ranking sentences based on TFIDF
      to the general topic of the cluster.
    - Cross Sentence Informational Subsumption (CSIS) measures redundancy between
      sentences
+****** Latent Semantic Analysis
+Unsupervised method to selected highly ranked sentences for single and
+multi-document summaries. Let an /n x m/ matrix exist where $n_i$ is a word in
+the corpus and $m_j$ is a sentence. Each entry $a_{ij}$ is the TFIDF weight for
+given word and sentence. Singular Value Decomposition (SVD) is then applied to
+retrieve three matrices: $A = U \Sigma V^T$ where $D = \Sigma V^T$ describes the
+relationship between a sentence and a topic.
 
+The assumption is that a topic can be expressed in a single sentence which is
+not always the case. Additional alternatives have been suggested to overcome
+this assumption.
+****** Bayesian Topic Models
+Using probability distributions to model probability of words overcomes two
+limitations present in other methods:
+1. Sentences are assumed to be independent so topics embedded in documents are
+   ignored
+2. Sentence scores are heuristics and therefore hard to interpret
+The scoring used in Bayesian topic models is typically the Kullbak-Liebler (KL)
+which measures the difference between two probability distributions P and Q.
+***** Indicator Representation
+****** Graph
+Represent documents as a graph. Often influenced by PageRank. Sentences are the
+vertices and edges are similarity (weights). Most common weight is cosine
+similarity against TFIDF weights for given words.
+****** Machine Learning
+Approach summarization as a classification problem. Machine Learning techniques include:
+- Naive Bayes
+- Decision Trees
+- Support Vector Machines
+- Hidden Markov Models*
+- Conditional Random Fields*
+ *Assume Dependence
+
+ Models that assume dependence often outperform those who do not.
 
 
 ** Abstraction
@@ -74,7 +108,32 @@ human readable summary. This is more advanced and computation-intenseive than
 Extraction.
 
 
-
+** Evaluating Summaries
+Principles in evaluating whether a summary is good or not
+1. Decide and specify the most important parts of the original text
+2. Identify important info in the candidate summary since the information can be
+   represented using disparate expressions.
+3. Readability
+*** Human Evaluation
+Self explanatory.
+*** Recall-Oriented Understudy for Gisting Evaluation (ROUGE)
+Determine the quality of a summary by comparing it to human summaries.
+**** ROUGE-n
+*gram*: a word
+A series of n-grams is created from the reference summary and the candidate
+summary (usually 2-3 and rarely 4 grams).
+$p$ = number of common n-grams
+$q$ = number of n-grams from reference summary
+$$
+{ROUGE-n} = \frac{p}{q}
+$$
+**** ROUGE-l
+Longest Common Subsequence (LCS) betweeen two sequences of text. The longer the
+LCS, the more similar they are. Requires ordering to be the same.
+**** ROUGE-SU
+Also called /skip-bi-gram/ and /uni-gram/.
+Allows insertion of words between the first and last words of bi-grams so
+consecutive words are not needed unlike ROUGE-n and ROUGE-l.
 * References
 ** [[https://towardsdatascience.com/a-quick-introduction-to-text-summarization-in-machine-learning-3d27ccf18a9f][Brief Introduction to NLP]]
 ** [[https://arxiv.org/pdf/1707.02268.pdf][Overview of Text Summarization Techniques]]
