@@ -29,25 +29,33 @@ summary. i.e. Type of document (Newspaper, Blog, Magazine, etc.)
 ****** Frequency Approach
 ******* Word Probability
 Probability of a word occuring in a document.
-#+BEGIN_LaTeX latex
+
 \begin{math}
-P(w) = \frac{f(w)}{N}
+
+    P(w) = \frac{f(w)}{N}
+
 \end{math}
-#+END_LaTeX
 
 For each sentence, the average probability of a word is assigned as a /weight/.
 Then, the best scoring sentence with the highest probability word is chosen to
 ensure that the sentence is present in the summary. The weight of the chosen
 word is then updated to ensure that a word in the summary is not chosen over a
 word that only occurs once [fn:1].
+
 \begin{math}
+
     p_{new}(w_i) = p_{old}(w_i) p_{old}(w_i)
+
 \end{math}
+
 ******* Term Frequency Inverse Document Frequency (TFIDF)
 A weighting technique which penalizes words that occur most frequently in a
 document.
+
 \begin{math}
+
     q(w) = f_d(w) \log(\frac{|D|}{f_D(w)})
+
 \end{math}
 
 $f_d(w)$: Term frequency of a word (w) in a document (d)
