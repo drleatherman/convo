@@ -29,10 +29,11 @@ summary. i.e. Type of document (Newspaper, Blog, Magazine, etc.)
 ****** Frequency Approach
 ******* Word Probability
 Probability of a word occuring in a document.
-
+#+BEGIN_LaTeX
 \begin{math}
     P(w) = \frac{f(w)}{N}
 \end{math}
+#+END_LaTeX
 
 For each sentence, the average probability of a word is assigned as a /weight/.
 Then, the best scoring sentence with the highest probability word is chosen to
