@@ -1,3 +1,7 @@
+#+startup: beamer
+#+LaTeX_CLASS: beamer
+#+BEAMER_FRAME_LEVEL: 2
+
 * Summarization
 ** Extraction
 Identifies important pieces of text within a corpus (body of text) and builds a
