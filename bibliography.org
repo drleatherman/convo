@@ -38,10 +38,10 @@ For each sentence, the average probability of a word is assigned as a /weight/.
 Then, the best scoring sentence with the highest probability word is chosen to
 ensure that the sentence is present in the summary. The weight of the chosen
 word is then updated to ensure that a word in the summary is not chosen over a
-word that only occurs once[fn:1].
-\begin{eq2}
+word that only occurs once [fn:1].
+\begin{math}
     p_{new}(w_i) = p_{old}(w_i) p_{old}(w_i)
-\end{eq2}
+\end{math}
 ******* Term Frequency Inverse Document Frequency (TFIDF)
 A weighting technique which penalizes words that occur most frequently in a
 document.
