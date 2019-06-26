@@ -1,10 +1,26 @@
 #+LATEX_CLASS: article
 
-* Summarization
-** Extraction
+* Summarizing Conversations
+
+** Introduction
+
+In order to broach the subject of summarizing conversations, a discourse in
+general Natural Language Processing (NLP) and summarization techniques is in
+order.
+
+*Research Questions*
+
+1. How are topics considered off-topic handled?
+2. Is the reply structure required in order to appropriately summarize conversations?
+   - By what degree does the reply structure improve summaries? i.e. modeling,
+     summary outcomes, etc.
+3. What considerations must be taken for two participants vs. $N$ participants?
+4. What is the best mechanism for assessing the /correctness/ of a summary? Why?
+
+*** Extraction
 Identifies important pieces of text within a corpus (body of text) and builds a
 summary which contains only those words.
-*** Building an Extraction
+**** Building an Extraction
 
 *Steps*
 
@@ -12,38 +28,38 @@ summary which contains only those words.
 2. Score Sentences based on a scoring algorithm
 3. Select a summary based on the scored sentences
 
-**** IR
+***** IR
 
-***** Topic Representation
+****** Topic Representation
 
 Interprets the topics discussed in the corpus. May use a Frequency approach, sentiment analysis, topic word (dictionary), or Bayesian
 Topic Model approach.
-****** Frequency
+******* Frequency
 Frequency of words used to determine a /topic/. This can be taken a step
 further by using the Log-Likelihood Ratio Test.
 
-***** Indicator Representation
+****** Indicator Representation
 
 Describes every sentence as a list with important covariates such as word count, length, position in the document, and presence
   of keywords.
 
-**** Sentence Score
+***** Sentence Score
 
 In a topic IR, this score is an indicator of importance of the sentence. In an
 Indicator IR, this score is some model based off the covariates. Importance of a sentence can be determined
 either by *count* or *proportion* of topic words.
 
-**** Summary Selection
+***** Summary Selection
 
 Selects the /k/ most important sentences for the summary. Additional criteria
 beyond the score may be assessed to determine the sentences chosen for the
 summary. i.e. Type of document (Newspaper, Blog, Magazine, etc.)
 
-***** Topic Representation
+****** Topic Representation
 
-****** Frequency Approach
+******* Frequency Approach
 
-******* Word Probability
+******** Word Probability
 
 Probability of a word occuring in a document.
 
@@ -58,7 +74,7 @@ word that only occurs once [fn:1].
 $p_{new}(w_i) = p_{old}(w_i) p_{old}(w_i)$
 
 
-******* Term Frequency Inverse Document Frequency (TFIDF)
+******** Term Frequency Inverse Document Frequency (TFIDF)
 
 A weighting technique which penalizes words that occur most frequently in a
 document.
@@ -73,7 +89,7 @@ $|D|$: Number of documents in a collection (D)
 
 - easy and fast to compute.
 - Used in many text summarizers
-******** Centroid-based Summarization
+********* Centroid-based Summarization
 A method of ranking sentences based on TFIDF
 
 *Steps*
@@ -91,7 +107,7 @@ A method of ranking sentences based on TFIDF
    - Cross Sentence Informational Subsumption (CSIS) measures redundancy between
      sentences
 
-****** Latent Semantic Analysis
+******* Latent Semantic Analysis
 
 Unsupervised method to selected highly ranked sentences for single and
 multi-document summaries. Let an /n x m/ matrix exist where $n_i$ is a word in
@@ -104,7 +120,7 @@ The assumption is that a topic can be expressed in a single sentence which is
 not always the case. Additional alternatives have been suggested to overcome
 this assumption.
 
-****** Bayesian Topic Models
+******* Bayesian Topic Models
 
 Using probability distributions to model probability of words overcomes two
 limitations present in other methods:
@@ -114,15 +130,15 @@ limitations present in other methods:
 The scoring used in Bayesian topic models is typically the Kullbak-Liebler (KL)
 which measures the difference between two probability distributions P and Q.
 
-***** Indicator Representation
+****** Indicator Representation
 
-****** Graph
+******* Graph
 
 Represent documents as a graph. Often influenced by PageRank. Sentences are the
 vertices and edges are similarity (weights). Most common weight is cosine
 similarity against TFIDF weights for given words.
 
-****** Machine Learning
+******* Machine Learning
 
 Approach summarization as a classification problem. Machine Learning techniques include:
 - Naive Bayes
@@ -136,14 +152,14 @@ Approach summarization as a classification problem. Machine Learning techniques 
  Models that assume dependence often outperform those who do not.
 
 
-** Abstraction
+**** Abstraction
 
 Interprets and analyzes important pieces of text within a corpus and builds a
 human readable summary. This is more advanced and computation-intenseive than
 Extraction.
 
 
-** Evaluating Summaries
+**** Evaluating Summaries
 
 Principles in evaluating whether a summary is good or not
 
@@ -152,15 +168,15 @@ Principles in evaluating whether a summary is good or not
    represented using disparate expressions.
 3. Readability
 
-*** Human Evaluation
+***** Human Evaluation
 
 Self explanatory.
 
-*** Recall-Oriented Understudy for Gisting Evaluation (ROUGE)
+***** Recall-Oriented Understudy for Gisting Evaluation (ROUGE)
 
 Determine the quality of a summary by comparing it to human summaries.
 
-**** ROUGE-n
+****** ROUGE-n
 
 *gram*: a word
 
@@ -175,21 +191,70 @@ $$
 {ROUGE-n} = \frac{p}{q}
 $$
 
-**** ROUGE-l
+****** ROUGE-l
 
 Longest Common Subsequence (LCS) betweeen two sequences of text. The longer the
 LCS, the more similar they are. Requires ordering to be the same.
 
-**** ROUGE-SU
+****** ROUGE-SU
 
 Also called /skip-bi-gram/ and /uni-gram/.
 
 Allows insertion of words between the first and last words of bi-grams so
 consecutive words are not needed unlike ROUGE-n and ROUGE-l.
 
+** Conversations
+Indicative vs Informative Summarization
+*Informative*: A concise replacement for one or more documents
+*Indicative*: Provides an idea about what is discussed in a document opposed to
+replacing it. Aims to help the reader assess if the conversation is worth
+reading.
+
+Current research suggests that Indicative summaries created by Extraction
+techniques are most appropriate. This is because using Abstraction to generate
+/headlines/ is a hard[fn:2] problem.
+
+The more /focused/ a conversation is, the easier it is to process. A focused
+conversation contains more informative information in the root or lower depth of
+a tree. Less focused conversations will have larger depths and are more likely have
+better information lower in the tree[fn:3]. For focused converations, one
+sentence per message is needed. This can be further optimized by including one
+from the root and one from the first leaf.
+
+*Features to assess*
+- Depth of discussion Tree
+- Branches
+- Subject
+  - If present, it can be used to score sentences that relate the most. Similar
+    to ROUGE-n
+
+*Message Cleansing*
+- Remove signature blocks and quotes
+- Other cleansing needed?
+ 
+Normalizing sentences gives preference to short sentences; however, the
+summaries created by the shorter sentences were not necessarily the most
+accurate or appropriate.
+
+*Things to look up*
+- Non-inflected lexical form from Word-Net?
+- LT POS Algorithm
+- Visualization Techniques. Graph?
+
 * References
-** [[https://towardsdatascience.com/a-quick-introduction-to-text-summarization-in-machine-learning-3d27ccf18a9f][Brief Introduction to NLP]]
-** [[https://arxiv.org/pdf/1707.02268.pdf][Overview of Text Summarization Techniques]]
-*** See Section 5 for further references to review for conversation summaries
-*** Nathan: See section 7
++ [[https://towardsdatascience.com/a-quick-introduction-to-text-summarization-in-machine-learning-3d27ccf18a9f][Brief Introduction to NLP]]
++ [[https://arxiv.org/pdf/1707.02268.pdf][Overview of Text Summarization Techniques]]
+  - See Section 5 for further references to review for conversation summaries
+  - *Nathan*: See section 7
+  - 45 - summary for 2 levels of discussion
+  - 56 - ML with features
+  - 47 - summarize a full mailbox rather than a thread with clustering and extracting summaries for each cluster
++ [[https://www.researchgate.net/publication/221303547_Facilitating_email_thread_access_by_extractive_summary_generation][Facilitating Email Thread Access by Extractive Summary Generation]]
+  - Newman 02a-b - Characterize all threads. Same as 47?
+  - Kan 01 - Deeper dive on Indicative vs Informative Summaries
+
+
+
 [fn:1] Unsure of this in particular. Need confirmation
+[fn:2] Is hard referring to NP-Hard or Hard as in difficult?
+[fn:3] Need more proof here.
