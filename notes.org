@@ -1,44 +1,53 @@
-#+startup: beamer
-#+LaTeX_CLASS: beamer
-#+BEAMER_FRAME_LEVEL: 2
+#+LATEX_CLASS: article
 
 * Summarization
 ** Extraction
 Identifies important pieces of text within a corpus (body of text) and builds a
 summary which contains only those words.
 *** Building an Extraction
+
 *Steps*
+
 1. Construct an IR (Intermediate Representation)
 2. Score Sentences based on a scoring algorithm
 3. Select a summary based on the scored sentences
+
 **** IR
+
 ***** Topic Representation
+
 Interprets the topics discussed in the corpus. May use a Frequency approach, sentiment analysis, topic word (dictionary), or Bayesian
 Topic Model approach.
 ****** Frequency
 Frequency of words used to determine a /topic/. This can be taken a step
 further by using the Log-Likelihood Ratio Test.
+
 ***** Indicator Representation
+
 Describes every sentence as a list with important covariates such as word count, length, position in the document, and presence
   of keywords.
+
 **** Sentence Score
+
 In a topic IR, this score is an indicator of importance of the sentence. In an
 Indicator IR, this score is some model based off the covariates. Importance of a sentence can be determined
 either by *count* or *proportion* of topic words.
+
 **** Summary Selection
+
 Selects the /k/ most important sentences for the summary. Additional criteria
 beyond the score may be assessed to determine the sentences chosen for the
 summary. i.e. Type of document (Newspaper, Blog, Magazine, etc.)
+
 ***** Topic Representation
+
 ****** Frequency Approach
+
 ******* Word Probability
+
 Probability of a word occuring in a document.
 
-\begin{math}
-
-    P(w) = \frac{f(w)}{N}
-
-\end{math}
+$P(w) = \frac{f(w)}{N}$
 
 For each sentence, the average probability of a word is assigned as a /weight/.
 Then, the best scoring sentence with the highest probability word is chosen to
@@ -46,21 +55,15 @@ ensure that the sentence is present in the summary. The weight of the chosen
 word is then updated to ensure that a word in the summary is not chosen over a
 word that only occurs once [fn:1].
 
-\begin{math}
+$p_{new}(w_i) = p_{old}(w_i) p_{old}(w_i)$
 
-    p_{new}(w_i) = p_{old}(w_i) p_{old}(w_i)
-
-\end{math}
 
 ******* Term Frequency Inverse Document Frequency (TFIDF)
+
 A weighting technique which penalizes words that occur most frequently in a
 document.
 
-\begin{math}
-
-    q(w) = f_d(w) \log(\frac{|D|}{f_D(w)})
-
-\end{math}
+$q(w) = f_d(w) \log(\frac{|D|}{f_D(w)})$
 
 $f_d(w)$: Term frequency of a word (w) in a document (d)
 
@@ -87,7 +90,9 @@ A method of ranking sentences based on TFIDF
      to the general topic of the cluster.
    - Cross Sentence Informational Subsumption (CSIS) measures redundancy between
      sentences
+
 ****** Latent Semantic Analysis
+
 Unsupervised method to selected highly ranked sentences for single and
 multi-document summaries. Let an /n x m/ matrix exist where $n_i$ is a word in
 the corpus and $m_j$ is a sentence. Each entry $a_{ij}$ is the TFIDF weight for
@@ -98,7 +103,9 @@ relationship between a sentence and a topic.
 The assumption is that a topic can be expressed in a single sentence which is
 not always the case. Additional alternatives have been suggested to overcome
 this assumption.
+
 ****** Bayesian Topic Models
+
 Using probability distributions to model probability of words overcomes two
 limitations present in other methods:
 1. Sentences are assumed to be independent so topics embedded in documents are
@@ -106,12 +113,17 @@ limitations present in other methods:
 2. Sentence scores are heuristics and therefore hard to interpret
 The scoring used in Bayesian topic models is typically the Kullbak-Liebler (KL)
 which measures the difference between two probability distributions P and Q.
+
 ***** Indicator Representation
+
 ****** Graph
+
 Represent documents as a graph. Often influenced by PageRank. Sentences are the
 vertices and edges are similarity (weights). Most common weight is cosine
 similarity against TFIDF weights for given words.
+
 ****** Machine Learning
+
 Approach summarization as a classification problem. Machine Learning techniques include:
 - Naive Bayes
 - Decision Trees
@@ -125,22 +137,31 @@ Approach summarization as a classification problem. Machine Learning techniques 
 
 
 ** Abstraction
+
 Interprets and analyzes important pieces of text within a corpus and builds a
 human readable summary. This is more advanced and computation-intenseive than
 Extraction.
 
 
 ** Evaluating Summaries
+
 Principles in evaluating whether a summary is good or not
+
 1. Decide and specify the most important parts of the original text
 2. Identify important info in the candidate summary since the information can be
    represented using disparate expressions.
 3. Readability
+
 *** Human Evaluation
+
 Self explanatory.
+
 *** Recall-Oriented Understudy for Gisting Evaluation (ROUGE)
+
 Determine the quality of a summary by comparing it to human summaries.
+
 **** ROUGE-n
+
 *gram*: a word
 
 A series of n-grams is created from the reference summary and the candidate
@@ -153,10 +174,14 @@ $q$ = number of n-grams from reference summary
 $$
 {ROUGE-n} = \frac{p}{q}
 $$
+
 **** ROUGE-l
+
 Longest Common Subsequence (LCS) betweeen two sequences of text. The longer the
 LCS, the more similar they are. Requires ordering to be the same.
+
 **** ROUGE-SU
+
 Also called /skip-bi-gram/ and /uni-gram/.
 
 Allows insertion of words between the first and last words of bi-grams so
