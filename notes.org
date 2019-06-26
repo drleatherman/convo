@@ -204,8 +204,11 @@ Allows insertion of words between the first and last words of bi-grams so
 consecutive words are not needed unlike ROUGE-n and ROUGE-l.
 
 ** Conversations
+
 Indicative vs Informative Summarization
+
 *Informative*: A concise replacement for one or more documents
+
 *Indicative*: Provides an idea about what is discussed in a document opposed to
 replacing it. Aims to help the reader assess if the conversation is worth
 reading.
