@@ -34,9 +34,22 @@ summary which contains only those words.
 
 Interprets the topics discussed in the corpus. May use a Frequency approach, sentiment analysis, topic word (dictionary), or Bayesian
 Topic Model approach.
+
 ******* Frequency
+
 Frequency of words used to determine a /topic/. This can be taken a step
 further by using the Log-Likelihood Ratio Test.
+
+******* Trees
+
+A document may be represented in a tree of topics and subtopics. This provides a
+structural relationship as an additional feature set for which to calculate
+scores. A /composite topic tree/ is used for cross document comparison.
+Specifically, composite trees merge many topic trees of the *same* type. A
+typicality score[fn:4] is computed as a feature for each topic. The typicality
+score can be used for prioritization of topics to include in a summary. When document trees of the same type are merged, it is easier to
+find patterns. For example, merging document trees about disease prevention will
+reveal common topics (Defintion, Symptoms, Treatment, etc.).
 
 ****** Indicator Representation
 
@@ -130,6 +143,16 @@ limitations present in other methods:
 The scoring used in Bayesian topic models is typically the Kullbak-Liebler (KL)
 which measures the difference between two probability distributions P and Q.
 
+******* Graph
+The /Centrifuser/[fn:5] summarizer uses a topic tree or composite topic tree as
+an IR. Sentences related to the topics should be clustered in order to elimnate redundancy. This
+is especially important when computing multi-document summaries. After clusters
+are formed, they can be ranked by the number of documents represented to
+highlight the most /diverse/ cluster possible.
+
+The number of sentences to choose if implementing sentence extraction can be
+weighted by the typicality score.
+
 ****** Indicator Representation
 
 ******* Graph
@@ -207,11 +230,15 @@ consecutive words are not needed unlike ROUGE-n and ROUGE-l.
 
 Indicative vs Informative Summarization
 
-*Informative*: A concise replacement for one or more documents
+*Informative*: A concise replacement for one or more documents. i.e. Abstracts, etc.
 
 *Indicative*: Provides an idea about what is discussed in a document opposed to
 replacing it. Aims to help the reader assess if the conversation is worth
-reading.
+reading. i.e. book jackets, card catalog entries, movie trailers, etc.
+
+Users who are browsing for information or interested in learning about a topic
+in general are more likely to be satisfied with an Informative Summary; however,
+indicative summaries are good at routing a user who is searching for a paricular question.
 
 Current research suggests that Indicative summaries created by Extraction
 techniques are most appropriate. This is because using Abstraction to generate
@@ -239,6 +266,9 @@ Normalizing sentences gives preference to short sentences; however, the
 summaries created by the shorter sentences were not necessarily the most
 accurate or appropriate.
 
+/Centrifuser/[fn:5] prefers paragrpahs or list items over section headings.
+Should this be honored for conversations?
+
 *Things to look up*
 - Non-inflected lexical form from Word-Net?
 - LT POS Algorithm
@@ -254,10 +284,12 @@ accurate or appropriate.
   - 47 - summarize a full mailbox rather than a thread with clustering and extracting summaries for each cluster
 + [[https://www.researchgate.net/publication/221303547_Facilitating_email_thread_access_by_extractive_summary_generation][Facilitating Email Thread Access by Extractive Summary Generation]]
   - Newman 02a-b - Characterize all threads. Same as 47?
-  - Kan 01 - Deeper dive on Indicative vs Informative Summaries
+  - [[https://academiccommons.columbia.edu/doi/10.7916/D8CF9ZG6][Domain-specific informative and indicative summarization for information retrieval]]
 
 
 
 [fn:1] Unsure of this in particular. Need confirmation
 [fn:2] Is hard referring to NP-Hard or Hard as in difficult?
 [fn:3] Need more proof here.
+[fn:4] How is this calculated?
+[fn:5] point to "Domain-specific informative..." article
