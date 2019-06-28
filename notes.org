@@ -257,6 +257,8 @@ from the root and one from the first leaf.
 - Subject
   - If present, it can be used to score sentences that relate the most. Similar
     to ROUGE-n
+- Partcipation
+ 
 
 *Message Cleansing*
 - Remove signature blocks and quotes
@@ -269,10 +271,67 @@ accurate or appropriate.
 /Centrifuser/[fn:5] prefers paragraphs or list items over section headings.
 Should this be honored for conversations?
 
+An archive of interaction can be considered a community with key players being
+its contributors.
+
+*** Interactions
+
+An interaction in this sense is defined as an input to a topic. It may be a
+question, an acknowledgement, a response, or all of the above. An interaction
+may be dependent on the medium in which it is posed. For example, an email
+interaction will contain some common and unqiue characteristics to a chat
+interaction. For example, both an email and a chat message will contain a timestamp and a user ID, while only emails contain signatures.
+
+When considering how to categorize and organize interactions, there must be
+consideration for the type of interactions.
+
+**** Structured
+
+A structured interaction is the strictest form. The easiest way
+to think about this is a questionnaire in which a direct question is posed and a
+response expected. While staying on topic isn't strictly enforced, the format
+encourages answers to be directly related. This form of interaction allows for
+the greatest amount of metadata to be collected due to a larger set of
+assumptions that can be made.
+
+**** Semi-structured
+
+A semi-structued interaction is generally associated with a topic. This could be
+an IRC chat for a particular subject or a response to an article on a news site.
+This type of interaction lends itself to be a guided /converation/. Given that
+the topic is broader, the types of interactions tend to follow suit and may only
+be tangentially related. Since there is some structure to the interactions,
+metadata can be collected and thus some assumptions can be formed though not as
+many as a structured interaction.
+
+**** Unstructured
+
+These forms of interactions are the loosest and are a step above text scraping.
+There is no inherent topic associated with the interaction though one may be
+inferred through analysis. A colloquial example is dialogue in a play. Some
+metadata may be present but it is weaker than that found in the other two types.
+i.e. line number.
+
+*Mediums*
+- Email
+- Collaborative Chat
+- Peer-to-Peer Chat
+- Public Forum
+
+*** Visualization
+**** Hierarchical Plots
+Given that messages are in or can be categorized in or can be categorized in a
+hierarchical format, there are a plethora of plots that can be used. One example
+is a treemap which displays the thread hierarchy in a series of boxes and content
+depending on the size of the boxes. Larger threads can be visualized this
+way but should be augmented to hide or /prune/ branches that aren't as relevant.
+Typically hierarchical plots show the relationship and provide some ability to
+drill into the details.
+
 *Things to look up*
 - Non-inflected lexical form from Word-Net?
 - LT POS Algorithm
-- Visualization Techniques. Graph?
+- What is WordNet?
 
 * References
 + [[https://towardsdatascience.com/a-quick-introduction-to-text-summarization-in-machine-learning-3d27ccf18a9f][Brief Introduction to NLP]]
@@ -288,7 +347,10 @@ Should this be honored for conversations?
     - 16 Scalable Browsing for Large Collections
     - 21 Document Clustering using Word Clusters via the Information Bottlebeck Method
   - [[https://academiccommons.columbia.edu/doi/10.7916/D8CF9ZG6][Domain-specific informative and indicative summarization for information retrieval]]
-
+    - 14 - Methodology for partitioning a message: Header, question, answer,
+      tail. Maximum Entropy Markov Models for Information Extraction and
+      Segmentation
+    - 23 - Ranked sub-conversations within threads (limited extent)
 
 
 [fn:1] Unsure of this in particular. Need confirmation
