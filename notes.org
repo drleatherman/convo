@@ -266,7 +266,7 @@ Normalizing sentences gives preference to short sentences; however, the
 summaries created by the shorter sentences were not necessarily the most
 accurate or appropriate.
 
-/Centrifuser/[fn:5] prefers paragrpahs or list items over section headings.
+/Centrifuser/[fn:5] prefers paragraphs or list items over section headings.
 Should this be honored for conversations?
 
 *Things to look up*
@@ -283,7 +283,10 @@ Should this be honored for conversations?
   - 56 - ML with features
   - 47 - summarize a full mailbox rather than a thread with clustering and extracting summaries for each cluster
 + [[https://www.researchgate.net/publication/221303547_Facilitating_email_thread_access_by_extractive_summary_generation][Facilitating Email Thread Access by Extractive Summary Generation]]
-  - Newman 02a-b - Characterize all threads. Same as 47?
+  - [[http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.83.5334&rep=rep1&type=pdf][Exploring Discussion Lists: Steps and Directions]]
+    - 15 Browsing in Digital Libraries: a Phrase-based Approach
+    - 16 Scalable Browsing for Large Collections
+    - 21 Document Clustering using Word Clusters via the Information Bottlebeck Method
   - [[https://academiccommons.columbia.edu/doi/10.7916/D8CF9ZG6][Domain-specific informative and indicative summarization for information retrieval]]
 
 
