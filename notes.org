@@ -226,7 +226,7 @@ Also called /skip-bi-gram/ and /uni-gram/.
 Allows insertion of words between the first and last words of bi-grams so
 consecutive words are not needed unlike ROUGE-n and ROUGE-l.
 
-** Conversations
+*** Conversations
 
 Indicative vs Informative Summarization
 
