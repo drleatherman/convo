@@ -312,11 +312,28 @@ inferred through analysis. A colloquial example is dialogue in a play. Some
 metadata may be present but it is weaker than that found in the other two types.
 i.e. line number.
 
-*Mediums*
+*** Mediums
+
+Just as data collection methods drive the assumptions taken in analysis, so does
+the medium of a given text.
+
 - Email
+  - Semi-structured
+    - Explicit Recipients, Sender, Timestamp, Subject, Importance
 - Collaborative Chat
+  - Semi-structured
+    - Timestamp, Sender, Recipients (Explicit (denoted by \@) and Implicit),
+      General Subject (Channel Metadata)
 - Peer-to-Peer Chat
+  - Unstructured
+    - Timestamp, Sender, Recipient
 - Public Forum
+  - Semi-structured
+    - Timestamp, Sender, Recipients (Implicit), Subject
+- Raw Text
+  - Unstructured
+    - Metadata dependent on source
+
 
 *** Visualization
 **** Hierarchical Plots
